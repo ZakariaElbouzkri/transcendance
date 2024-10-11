@@ -1,0 +1,13 @@
+FROM python:3.11.4-slim-buster
+
+COPY requirements.txt ./
+
+RUN pip3 install --upgrade pip && pip3 install -r requirements.txt
+
+COPY . .
+
+# RUN python manage.py make_migrations && python manage.py migrate
+
+EXPOSE 8000
+
+# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
