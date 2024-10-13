@@ -42,3 +42,5 @@ htmlcov/
 # Migrations
 **/migrations/*
 !**/migrations/__init__.py
+
+.env.example
