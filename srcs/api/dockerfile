@@ -1,13 +1,34 @@
-FROM python:3.11.4-slim-buster
+FROM python:3.11.4-slim-bullseye
 
+# Install dependencies required for building SQLite and upgrading packages
+RUN apt-get update && apt-get install -y \
+    wget \
+    build-essential \
+    libsqlite3-dev \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+
+# Download and install SQLite 3.41.0 or later
+RUN wget https://www.sqlite.org/2023/sqlite-autoconf-3410200.tar.gz \
+    && tar -xvzf sqlite-autoconf-3410200.tar.gz \
+    && cd sqlite-autoconf-3410200 \
+    && ./configure --prefix=/usr/local \
+    && make \
+    && make install \
+    && cd .. \
+    && rm -rf sqlite-autoconf-3410200*
+
+# Rebuild and link the new SQLite version
+RUN ldconfig
+
+# Install Python dependencies
 COPY requirements.txt ./
-
 RUN pip3 install --upgrade pip && pip3 install -r requirements.txt
 
+# Copy the project files
 COPY . .
 
-# RUN python manage.py make_migrations && python manage.py migrate
-
+# Expose the application port
 EXPOSE 8000
 
-# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD [ "bash", "run.sh"]
