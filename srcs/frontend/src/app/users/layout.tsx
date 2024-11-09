@@ -1,7 +1,8 @@
 import { UserContextProvider } from "@/context/UserContext";
-import VerticalNavbar from "@/components/VerticalNavbar/VerticalNavbar"; // Ensure correct path to your component
-import HorizontalNavbar from "@/components/HorizontalNavbar/HorizontalNavbar"; // Ensure correct path to your component
-import "./layout.css"; // Optional: add layout-specific styles
+import VerticalNavbar from "@/components/VerticalNavbar/VerticalNavbar";
+import HorizontalNavbar from "@/components/HorizontalNavbar/HorizontalNavbar";
+import NavBar from "@/components/NavBar/NavBar";
+import "./layout.css";
 
 export const metadata = {
   title: "User Dashboard",
@@ -14,6 +15,7 @@ export default function UsersLayout({
   children: React.ReactNode;
 }) {
   return (
+    <UserContextProvider>
       <div className="layout-container">
         <div className="verticalNavbarr">
           <VerticalNavbar />
@@ -22,10 +24,14 @@ export default function UsersLayout({
           <div className="horizontalNavbarr">
             <HorizontalNavbar />
           </div>
+          <div className="navBarContainer">
+            <NavBar />
+          </div>
           <div className="page-content">
-            {children} 
+            {children}
           </div>
         </div>
       </div>
+    </UserContextProvider>
   );
 }

@@ -8,16 +8,44 @@ import ProgressBar from '../../../components/ProgressBar/ProgressBar'
 import Friends from '../../../components/Friends/Friends'
 import { Achievements } from '../../../components/Achievements/Achievements'
 import { useRouter } from 'next/navigation'
-import { UserContext } from '@/context/UserContext'
+import { UserContext, useUserContext } from '@/context/UserContext'
+import axios from 'axios'
 // import loadMyData from '@/Components/LoadMyData'
 const Home = () => {
-  const {updateCurrentPage } = useContext(UserContext);
+  const {updateUserData, updateCurrentPage } = useUserContext();
 
   const router = useRouter();
   useEffect(() => {
-    updateCurrentPage("Home");
+    updateCurrentPage("home");
     const fetchData = async () => {
+      try {
+        const res = await axios.get("http://localhost:8000/api/users/me/");
+        // console.log(res.data.avatar_url);
+        updateUserData({
+          id: res.data.id,
+          otp_uri: res.data.otp_uri,
+          last_login: res.data.last_login,
+          is_superuser: res.data.is_superuser,
+          username: res.data.username,
+          first_name: res.data.first_name,
+          last_name: res.data.last_name,
+          email: res.data.email,
+          is_staff: res.data.is_staff,
+          is_active: res.data.is_active,
+          date_joined: res.data.date_joined,
+          two_fa_enabled: res.data.two_fa_enabled,
+          is_online: res.data.is_online,
+          avatar_url: res.data.avatar_url,
+          wins: res.data.wins,
+          loses: res.data.loses,
+          rating: res.data.rating,
+          rank: res.data.rank,
+        })
 
+      } catch (err: any) {
+        console.log("Error in fetching user data", err);
+      } finally {
+      }
     };
 
     fetchData();

@@ -1,5 +1,5 @@
-import react from "react"
-import classes from './InputField.module.css'
+import React from "react";
+import classes from './InputField.module.css';
 
 interface InputFieldProps {
     label: string;
@@ -19,21 +19,21 @@ const InputField: React.FC<InputFieldProps> = ({
     value,
     onChange,
     error,
-}) =>{
+}) => {
     return (
-    <div className={classes.container}>
-        <label htmlFor={id} className={classes.label}>{label}:</label>
-        <input
-            type={type}
-            id={id}
-            name={name}
-            value={value}
-            onChange={onChange}
-            placeholder={label}
-            className={classes.input}
-        />
-        {error && <p className={classes.errorMsg}>{error}</p>}
-    </div>
+        <div className={classes.container}>
+            <label htmlFor={id} className={classes.label}>{label}:</label>
+            <input
+                type={type}
+                id={id}
+                name={name}
+                value={value}
+                onChange={onChange}
+                placeholder={label}
+                className={classes.input}
+            />
+            {error && <p className={classes.errorMsg}>{error}</p>}
+        </div>
     );
 };
 

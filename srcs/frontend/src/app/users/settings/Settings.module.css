@@ -1,101 +1,98 @@
-.container{
+.container {
     width: 100%;
     display: flex;
     justify-content: center;
+    padding: 20px;
 }
+
 .Settings {
     display: flex;
     flex-direction: column;
     flex: 1;
     align-items: center;
     max-width: 700px;
-    overflow-y: scroll;
+    overflow-y: auto;
     scrollbar-width: none;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-    .editProfileTitle{
-        font-size: 1.25rem;
-        width: 100%;
-        text-align: center;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.255);
-        padding: 20px;
-    }
+.editProfileTitle {
+    font-size: 24px;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #E0E0E0;
+    padding: 20px;
+    color: #333333;
+}
 
+.editContainer {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.label {
+    font-size: 16px;
+    font-weight: 500;
+    width: 200px;
+    color: #333333;
+}
+
+.inputProvisoir {
+    border-radius: 4px;
+    border: 1px solid #CCCCCC;
+    padding: 10px;
+    max-width: 400px;
+    font-size: 16px;
+    background: #FFFFFF;
+    cursor: pointer;
+    height: 40px;
+}
+
+.imageProvisoir {
+    font-size: 16px;
+    border-radius: 4px;
+    border: none;
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image {
+    border-radius: 50%;
+}
+
+.editButton {
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    color: #3366CC;
+    background-color: transparent;
+    text-decoration: none;
+    border-bottom: 2px solid #3366CC;
+    padding-bottom: 2px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.editButton:hover {
+    color: #264D99;
+    border-color: #264D99;
+}
+
+@media screen and (max-width: 640px) {
     .editContainer {
-        display: flex;
-        width: 100%;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-        padding: 20px;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.229);
-        @media screen and (max-width: 640px) {
-            flex-direction: column;
-        }
-        
-        .label {
-            font-size: 1.5rem;
-            width: 200px;
-            @media screen and (max-width: 640px) {
-                width:auto;
-            }
-        }
-
-        .inputProvisoir {
-
-            border-radius: 5px;
-            border: none;
-            padding: 20px;
-            max-width: 400px;
-            font-size: 1.5rem;
-            background: #ffffff;
-            cursor: pointer;
-            border: 1px solid #CCCCCC;
-            height: 50px;
-        }
-        .imageProvisoir {
-            font-size: 1.5rem;
-            border-radius: 5px;
-            border: none;
-            width: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            
-
-            .image {
-                border-radius: 50%;
-            }
-        }
-        .editButton {
-            border: none;
-            font-size: 1.0625rem;
-            cursor: pointer;
-            color: hsl(216.38deg 44.76% 41.18%);
-            background-color: transparent;
-            text-decoration: none; /* Remove default underline */
-            border-bottom: 2px solid hsl(216.38deg 44.76% 41.18%); /* Custom underline */
-            padding-bottom: 2px; /* Adjust spacing between text and underline */
-        }
-        
+        flex-direction: column;
     }
 
-    .buttonContainer {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        font-size: 10px;
-        gap: 20px;
-        
-        .button {
-            height: 100px;
-            border-radius: 5px;
-            border: none;
-            padding: 20px;
-            width: 200px;
-            font-size: 30px;
-            background-color: #F5F5F5;
-            cursor: pointer;
-        }
+    .label {
+        width: auto;
     }
 }

@@ -1,9 +1,6 @@
 "use client";
 
-import React, { useContext, useEffect } from "react";
-import classes from './VerticalNavbar.module.css';
-import Image from "next/image";
-import mainLogo from '../../../assets/Main-Logo.svg';
+import React, { useContext, useState } from "react";
 import chatLogoWithe from '../../../assets/chatLogoWithe.svg';
 import chatLogoBlack from '../../../assets/chatLogoBlack.svg';
 import gameLogoWithe from '../../../assets/gameLogoWithe.svg';
@@ -16,11 +13,15 @@ import SettingsWithe from '../../../assets/SettingsWithe.svg';
 import SettingsBlack from '../../../assets/SettingsBlack.svg';
 import LogoutWithe from '../../../assets/LogoutWithe.svg';
 import LogoutBlack from '../../../assets/LogoutBlack.svg';
-import { UserContext, useUserContext } from "../../context/UserContext";
+import { useUserContext } from "@/context/UserContext";
+import mainLogo from '../../../assets/Main-Logo.svg';
+import Image from "next/image";
 import Link from "next/link";
-import axios from "axios";
+import classes from './NavBar.module.css'
 
-const VerticalNavbar = () => {
+
+const NavBar = () => {
+
     const pages = [
         { name: "home", logoBlack: homeLogoBlack, logoWhite: homeLogoWithe },
         { name: "chat", logoBlack: chatLogoBlack, logoWhite: chatLogoWithe },
@@ -29,7 +30,6 @@ const VerticalNavbar = () => {
         { name: "settings", logoBlack: SettingsBlack, logoWhite: SettingsWithe },
         { name: "logout", logoBlack: LogoutBlack, logoWhite: LogoutWithe }
     ];
-
     const { currentPage, updateCurrentPage } = useUserContext();
 
     const handlePageChange = (page: string) => {
@@ -37,10 +37,10 @@ const VerticalNavbar = () => {
     };
 
     return (
-        <nav className={classes.navbar}>
-            <div className={classes.logo}>
+    <nav className={classes.navbar}>
+            {/* <div className={classes.logo}>
                 <Image className={classes.image} src={mainLogo} alt="Main Logo" />
-            </div>
+            </div> */}
             <div className={classes.pagesButtons}>
                 {pages.slice(0, 4).map((item) => (
                     <Link href={"/users/" + item.name} key={item.name}>
@@ -53,6 +53,7 @@ const VerticalNavbar = () => {
                                 src={item.name === currentPage ? item.logoWhite : item.logoBlack} 
                                 alt={item.name} 
                             />
+                            <p>{item.name}</p>
                         </button>
                     </Link>
                 ))}
@@ -69,6 +70,7 @@ const VerticalNavbar = () => {
                                 src={item.name === currentPage ? item.logoWhite : item.logoBlack} 
                                 alt={item.name} 
                             />
+                                                        <p>{item.name}</p>
                         </button>
                     </Link>
                 ))}
@@ -77,4 +79,4 @@ const VerticalNavbar = () => {
     );
 };
 
-export default VerticalNavbar;
+export default NavBar;

@@ -1,46 +1,133 @@
-.Friends{
+.Friends {
     display: flex;
     flex-direction: column;
-    background-color: #E0E0E0;
-    border: 1px solid #B0B0B0;
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0;
     height: 100%;
-    border-radius: 5px;
-
-    .buttons{
-        display: flex;
-        justify-content: space-around;
-        margin: 17px;
-
-        .button{
-            width: 90px;
-            height: 50px;
-            border:none;
-            background-color: #ffffff;
-            color: #000000;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 22px;
-        }
-        .buttonClicked{
-            width: 90px;
-            height: 50px;
-            border:none;
-            background-color: #000000;
-            color: #ffffff;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 22px;
-        }
-    }
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.Online{
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+    background-color: #F5F5F5;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.button {
+    width: 100px;
+    height: 40px;
+    border: none;
+    background-color: #FFFFFF;
+    color: #333333;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.buttonClicked {
+    width: 100px;
+    height: 40px;
+    border: none;
+    background-color: #333333;
+    color: #FFFFFF;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.Online {
     display: flex;
     align-items: center;
-    .image{
-        border-radius: 50%;
-        margin: 7px;
-    }
-    &:hover{
-        background-color: #00000024;
-    }
+    padding: 15px;
+    transition: background-color 0.3s ease;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.Online:hover {
+    background-color: #F5F5F5;
+}
+
+.image {
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.nameAndMsg {
+    flex: 1;
+}
+
+.name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 5px;
+}
+
+.message {
+    font-size: 14px;
+    color: #666666;
+    margin-bottom: 10px;
+}
+
+.data {
+    overflow-y: auto;
+    max-height: calc(100% - 70px);
+}
+
+.actionButtons {
+    display: flex;
+    gap: 10px;
+}
+
+.actionButton {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.challengeButton {
+    background-color: #4CAF50;
+    color: #FFFFFF;
+}
+
+.challengeButton:hover {
+    background-color: #45a049;
+}
+
+.messageButton {
+    background-color: #2196F3;
+    color: #FFFFFF;
+}
+
+.messageButton:hover {
+    background-color: #1e88e5;
+}
+
+.acceptButton {
+    background-color: #4CAF50;
+    color: #FFFFFF;
+}
+
+.acceptButton:hover {
+    background-color: #45a049;
+}
+
+.unblockButton {
+    background-color: #FF5722;
+    color: #FFFFFF;
+}
+
+.unblockButton:hover {
+    background-color: #f4511e;
 }

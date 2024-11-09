@@ -123,3 +123,9 @@
         }
     }
 }
+
+.errorMsg {
+    font-size: 14px; 
+    color: #D32F2F;
+    margin-top: 5px; 
+}

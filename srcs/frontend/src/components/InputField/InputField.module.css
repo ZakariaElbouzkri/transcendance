@@ -4,36 +4,35 @@
     align-items: center;
     margin-bottom: 20px;
     width: 100%;
+}
 
+.label {
+    font-size: 18px;
+    color: #000000;
+    margin-bottom: 5px; 
+    width: 100%;
+    text-align: left;
+    max-width: 400px;
+}
 
-    .label {
-        font-size: 18px;
-        color: #1A1A1A;
-        margin-bottom: 5px; 
-        width: 100%;
-        text-align: left;
-        max-width: 400px;
-    }
+.input {
+    height: 45px; 
+    max-width: 400px;
+    width: 100%;
+    border: 1px solid #000000;
+    border-radius: 25px; 
+    padding: 0 11px;
+    font-size: 16px;
+    transition: border-color 0.3s ease; 
+}
 
-    .input {
-        height: 45px; 
-        max-width: 400px;
-        width: 100%;
-        border: 1px solid #C1BBBB;
-        border-radius: 25px; 
-        padding: 0 11px;
-        font-size: 16px;
-        transition: border-color 0.3s ease; 
-        
-        &:focus {
-            border-color: #4A90E2;
-            outline: none; 
-        }
-    }
+.input:focus {
+    border-color: rgb(255, 155, 4);
+    outline: none; 
+}
 
-    .errorMsg {
-        font-size: 14px; 
-        color: #D32F2F;
-        margin-top: 5px; 
-    }
+.errorMsg {
+    font-size: 14px; 
+    color: #D32F2F;
+    margin-top: 5px; 
 }

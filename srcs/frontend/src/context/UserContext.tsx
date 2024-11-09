@@ -8,6 +8,10 @@ interface UserContextType {
     updateCurrentPage: (pageName: string) => void;
     userData: UserDataType;
     updateUserData: (data: UserDataType) => void;
+    search: string;
+    updateSearch: (data: string) => void;
+    searchedUserData: SearchedUserDataType;
+    updateSearchedUserData: (data: SearchedUserDataType) => void;
 }
 
 // Define a type for the user data
@@ -30,7 +34,20 @@ interface UserDataType {
     loses: number;
     rating: number;
     rank: number;
+}
 
+// Define a type for the searched user data
+interface SearchedUserDataType {
+    avatar_url: string;
+    first_name: string;
+    id: number;
+    is_online: boolean;
+    last_name: string;
+    loses: number;
+    rank: number;
+    rating: number;
+    username: string;
+    wins: number;
 }
 
 // Create the context with a default value of `undefined` for type safety
@@ -57,25 +74,55 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
         date_joined: "",
         two_fa_enabled: false,
         is_online: "",
-        avatar_url: "" ,
+        avatar_url: "",
         wins: 0,
         loses: 0,
         rating: 0,
         rank: 0,
-
     });
+    const [searchedUserData, setSearchedUserData] = useState<SearchedUserDataType>({
+        avatar_url: "",
+        first_name: "",
+        id: 0,
+        is_online: false,
+        last_name: "",
+        loses: 0,
+        rank: 0,
+        rating: 0,
+        username: "",
+        wins: 0,
+    });
+
+    const [search, setSearch] = useState<string>("");
+
+    const updateSearchedUserData = (data: SearchedUserDataType) => {
+        setSearchedUserData(data);
+    };
 
     const updateCurrentPage = (pageName: string) => {
         setCurrentPage(pageName);
     };
 
+    const updateSearch = (data: string) => {
+        setSearch(data);
+    };
+
     const updateUserData = (data: UserDataType) => {
         setUserData(data);
-        console.log("daata", data)
+        console.log("data", data);
     };
 
     return (
-        <UserContext.Provider value={{ currentPage, updateCurrentPage, userData, updateUserData }}>
+        <UserContext.Provider value={{
+            currentPage,
+            updateCurrentPage,
+            userData,
+            updateUserData,
+            search,
+            updateSearch,
+            searchedUserData,
+            updateSearchedUserData
+        }}>
             {children}
         </UserContext.Provider>
     );

@@ -1,0 +1,79 @@
+.Friends {
+    display: flex;
+    flex-direction: column;
+    background-color: #F5F5F5;
+    border: 1px solid #E0E0E0;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.button {
+    width: 100px;
+    height: 40px;
+    border: none;
+    background-color: #F5F5F5;
+    color: #333333;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.buttonClicked {
+    width: 100px;
+    height: 40px;
+    border: none;
+    background-color: #333333;
+    color: #FFFFFF;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.Online {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.Online:hover {
+    background-color: #E0E0E0;
+}
+
+.image {
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.nameAndMsg {
+    flex: 1;
+}
+
+.name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 5px;
+}
+
+.message {
+    font-size: 14px;
+    color: #666666;
+}
+
+.data {
+    overflow-y: auto;
+    max-height: calc(100% - 70px);
+}

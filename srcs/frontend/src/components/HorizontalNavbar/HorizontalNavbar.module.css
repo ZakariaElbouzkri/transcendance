@@ -1,154 +1,90 @@
-.container{
+.container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 100%;
     width: 100%;
+    padding: 0 15px;
+}
 
-    .searchBar{
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        @media screen and (max-width: 419px) {
-            display: none;
-        }
+.searchBar {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
 
+.searchButton {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.iconsContainer {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: #F5F5F5;
+    border: 1px solid #E0E0E0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.image {
+    width: 20px;
+    height: 20px;
+}
+
+.container2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.iconsContainerSelected {
+    background-color: #333333;
+    border-color: #333333;
+}
+
+.profile {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #E0E0E0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.X {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.displayNone {
+    display: none;
+}
+
+@media screen and (max-width: 419px) {
+    .searchBar {
+        display: none;
     }
-    .searchButton{
-        flex: 1;
+    .searchButton {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        .iconsContainer{
-            height: 40px;
-            width: 40px;
-            border-radius: 50%;
-            background-color: #E0E0E0;
-            border: 1px solid #CCCCCC;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            .image{
-                width: 20px;
-                height: 20px;
-            }
-        }
-        @media screen and (min-width: 420px) {
-            display: none;
-        }
-
-
-    }
-
-    .container2{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 5px;
-        margin: 10px;
-
-
-        .iconsContainer{
-            height: 40px;
-            width: 40px;
-            border-radius: 50%;
-            background-color: #E0E0E0;
-            border: 1px solid #CCCCCC;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            .image{
-                width: 20px;
-                height: 20px;
-            }
-        }
-        .iconsContainerSelected{
-            height: 40px;
-            width: 40px;
-            border-radius: 50%;
-            background-color: black;
-            border: 1px solid #CCCCCC;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            .image{
-                width: 20px;
-                height: 20px;
-            }
-        }
-        .iconsContainerSearchActive{
-            display: none;
-        }
-
-        .profile{
-            width: 40px;
-            height: 40px;
-            background-color: aquamarine;
-            border-radius: 50%;
-            border: 1px solid #CCCCCC;
-            display: flex;
-            align-items: center;justify-content: center;
-            .image{
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                border: 1px solid #CCCCCC;
-            }
-            cursor: pointer;
-
-            .image{
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                border: 1px solid #CCCCCC;
-            }
-        }
-        .profileSearchActive{
-            
-            width: 40px;
-            height: 40px;
-            background-color: aquamarine;
-            border-radius: 50%;
-            border: 1px solid #CCCCCC;
-            display: flex;
-            align-items: center;justify-content: center;
-            .image{
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                border: 1px solid #CCCCCC;
-            }
-            cursor: pointer;
-            @media screen and (max-width: 419px) {
-                display: none;
-            }
-        }
-        .X{
-            width: 40px;
-            height: 40px;
-            background-color: transparent;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            .image{
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-            }
-            cursor: pointer;
-            border: none;
-        }
-
     }
 }
 
-.displayNone{
-    display: none;
+@media screen and (min-width: 420px) {
+    .searchButton {
+        display: none;
+    }
 }

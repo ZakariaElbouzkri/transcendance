@@ -20,9 +20,11 @@ const Settings: React.FC = () => {
   const [currentPage, setCurrentPage] = React.useState("");
   const router = useRouter();
   const { userData } = useUserContext();
+  const { updateCurrentPage } = useUserContext();
 
   React.useEffect(() => {
-    
+    updateCurrentPage("settings");
+
   }, []);
 
   return (

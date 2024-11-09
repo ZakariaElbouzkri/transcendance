@@ -1,79 +1,71 @@
-.choices {
+.navbar {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    width: 100px;
+    width: 70px;
     height: 100vh;
+    background-color: #F5F5F5;
+    padding: 20px 0;
+    transition: all 0.3s ease;
+}
+
+.logo {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image {
+    width: 40px;
+    height: 40px;
+}
+
+.pagesButtons,
+.settingsAndLogout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button,
+.buttonSelected {
+    width: 50px;
+    height: 50px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button {
+    background-color: transparent;
+    color: #333333;
+}
+
+.buttonSelected {
+    background-color: #333333;
+    color: #FFFFFF;
+}
+
+.button:hover,
+.buttonSelected:hover {
     background-color: #E0E0E0;
+}
 
-    .logo {
-        width: 100px;
-        height: 100px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+.buttonImage {
+    width: 24px;
+    height: 24px;
+}
 
-        .image {
-            width: 50px;
-            height: 50px;
-        }
-    }
-
-    .pagesButtons {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .settingsAndLogout {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .button {
-        width: 50px;
-        height: 50px;
-        margin: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid #000000; 
-        border-radius: 10px;
-        cursor: pointer;
-        background-color: #FFFFFF; 
-        color: #000000; 
-        
-        .buttonImage {
-            width: 30px;
-            height: 30px;
-        }
-
-        &:hover {
-            background-color: #CCCCCC; 
-        }
-    }
-
-    .buttonSelected {
-        width: 50px;
-        height: 50px;
-        margin: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid #CCCCCC; 
-        border-radius: 10px;
-        cursor: pointer;
-        background-color: #000000; 
-        color: #FFFFFF; 
-        
-        .buttonImage {
-            width: 30px;
-            height: 30px;
-        }
-
-
-        &:hover {
-            background-color: #CCCCCC;
-        }
+@media screen and (max-width: 880px) {
+    .navbar {
+        display: none;
     }
 }

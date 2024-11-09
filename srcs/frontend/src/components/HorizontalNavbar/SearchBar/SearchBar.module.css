@@ -1,29 +1,102 @@
-.container{
+.container {
     display: flex;
     border: 1px solid #CCCCCC;
     height: 40px;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     min-width: 200px;
     max-width: 400px;
     width: 90%;
-    border-radius: 10px;
-    background-color: #E0E0E0;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+    transition: all 0.3s ease;
+    position: relative;
+}
 
-    .image{
-        width: 15px;
-        height: 15px;
-        margin-right: 10px;
-        margin-left: 10px;
+.container.active {
+    background-color: #000000;
+}
+
+.image {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.input {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    height: 100%;
+    color: #000000;
+    font-size: 14px;
+}
+
+.container.active .input {
+    color: #FFFFFF;
+}
+
+.input::placeholder {
+    color: #999999;
+}
+
+.container.active .input::placeholder {
+    color: #CCCCCC;
+}
+
+.input:focus {
+    border: none;
+    outline: none; 
+}
+
+.resultContainer {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-top: none;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.resultItem {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border: none;
+    background-color: transparent;
+    width: 100%;
+}
+
+.resultItem:hover {
+    background-color: #F5F5F5;
+}
+
+.resultItem h2 {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #000000;
+}
+
+@media (max-width: 480px) {
+    .container {
+        max-width: 100%;
     }
-    .input{
-        background-color: transparent;
-        border: none;
-        width: 100%;
-        height: 100%;   
-    }
-    .input:focus {
-        border: none;
-        outline: none; 
-    }
+}
+
+.showAllBtn{
+    width: 100%;
+    height: 40px;
+    border: none;
+    background-color: transparent;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
 }
