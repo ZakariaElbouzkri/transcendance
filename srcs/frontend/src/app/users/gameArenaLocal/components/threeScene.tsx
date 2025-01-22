@@ -10,8 +10,7 @@ import Paddle from './paddle'
 const planeH = 15
 const planeW = 10
 
-export default function ThreeScene() {
-  const [score, setScore] = useState({ player1: 0, player2: 0 })
+export default function ThreeScene({ onScoreUpdate }) {
   const [paddle1Pos, setPaddle1Pos] = useState([0, 0, (planeH / 2) - 0.1])
   const [paddle2Pos, setPaddle2Pos] = useState([0, 0, -(planeH / 2) + 0.1])
 
@@ -19,7 +18,7 @@ export default function ThreeScene() {
     let paddle1Direction = 0
     let paddle2Direction = 0
 
-    const handleKeyDown = (event: KeyboardEvent) => {
+    const handleKeyDown = (event) => {
       switch (event.key) {
         case 'ArrowLeft':
           paddle1Direction = -1
@@ -36,7 +35,7 @@ export default function ThreeScene() {
       }
     }
 
-    const handleKeyUp = (event: KeyboardEvent) => {
+    const handleKeyUp = (event) => {
       switch (event.key) {
         case 'ArrowLeft':
         case 'ArrowRight':
@@ -73,12 +72,8 @@ export default function ThreeScene() {
     }
   }, [])
 
-  const handleScoreUpdate = (newScore: { player1: number; player2: number }) => {
-    setScore(newScore)
-  }
-
   return (
-    <div className="w-full h-full aspect-[2/0.98]">
+    <div className="h-screen aspect-[1/0.98]">
       <Canvas camera={{ position: [0, 19, 2], fov: 60 }}>
         <OrbitControls />
         <ambientLight intensity={0.4} />
@@ -88,7 +83,7 @@ export default function ThreeScene() {
             { x: paddle1Pos[0], y: paddle1Pos[1], z: paddle1Pos[2] },
             { x: paddle2Pos[0], y: paddle2Pos[1], z: paddle2Pos[2] }
           ]}
-          onScoreUpdate={handleScoreUpdate}
+          onScoreUpdate={onScoreUpdate}
         />
         <Paddle position={paddle1Pos as [number, number, number]} />
         <Paddle position={paddle2Pos as [number, number, number]} />
@@ -96,4 +91,3 @@ export default function ThreeScene() {
     </div>
   )
 }
-

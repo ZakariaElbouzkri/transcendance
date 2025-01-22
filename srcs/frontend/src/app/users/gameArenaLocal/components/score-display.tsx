@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Card } from "@/components/ui/card"
-import type { GameState } from "./types/game"
+import type { GameState } from "../types/game"
 
 export function ScoreDisplay({ player1Score, player2Score, winner, isGameOver }: GameState) {
   return (

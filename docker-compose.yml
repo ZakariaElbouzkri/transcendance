@@ -82,8 +82,8 @@ services:
             - "6379:6379"
         networks:
             - transcendance_net
-        volumes:
-            - ./srcs/redis/logs/:/var/log/redis/
+        # volumes:
+        #     - ./srcs/redis/logs/:/var/log/redis/
         restart: always
         healthcheck:
             test: ["CMD", "redis-cli", "ping"]

@@ -5,7 +5,7 @@ import { PlayerCard } from './components/player-card'
 import { ScoreDisplay } from './components/score-display'
 import ThreeScene from './components/threeScene'
 
-export default function Game() {
+export default function Game(playerOne, playerTwo) {
   const [gameState, setGameState] = useState({
     player1Score: 0,
     player2Score: 0,
@@ -16,14 +16,14 @@ export default function Game() {
   return (
     <div className="min-h-screen bg-background p-4">
       <div className="space-y-4">
-        <div className="grid grid-cols-3 gap-10  ">
+        <div className="grid grid-cols-3 gap-10">
           <PlayerCard
-            source="/player.png?height=56&width=56"
-            playerName="Player 1"
+            source={playerOne.img}
+            playerName={playerOne}
             playerScore={gameState.player1Score}
             direction="left"
             rank="Pro"
-            isActive={!gameState.winner || gameState.winner === 'Player 1'}
+            isActive={!gameState.winner || gameState.winner === playerOne}
           />
           
           <ScoreDisplay
@@ -35,16 +35,16 @@ export default function Game() {
           
           <PlayerCard
             source="/player.png?height=56&width=56"
-            playerName="Player 2"
+            playerName={playerTwo}
             playerScore={gameState.player2Score}
             direction="right"
             rank="Rookie"
-            isActive={!gameState.winner || gameState.winner === 'Player 2'}
+            isActive={!gameState.winner || gameState.winner === playerTwo}
           />
         </div>
 
         <div className="rounded-lg border bg-muted overflow-hidden">
-          <ThreeScene />
+          <ThreeScene playerOne={playerOne} playerTwo={playerTwo}/>
         </div>
       </div>
     </div>

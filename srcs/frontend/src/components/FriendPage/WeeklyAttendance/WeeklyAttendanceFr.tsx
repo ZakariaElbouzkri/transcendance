@@ -4,9 +4,9 @@ import 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels'; // Import the plugin
 import classes from './WeeklyAttendanceFr.module.css';
 
-const Pie = dynamic(() => import('react-chartjs-2').then((mod) => mod.Pie), {
-  ssr: false,
-});
+// const Pie = dynamic(() => import('react-chartjs-2').then((mod) => mod.Pie), {
+//   ssr: false,
+// });
 
 // Sample data for wins and losses
 const matches = { win: 15, lose: 10 }; // Example match data

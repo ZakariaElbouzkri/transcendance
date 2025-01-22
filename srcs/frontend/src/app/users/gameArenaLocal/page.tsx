@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { PlayerCard } from './components/player-card'
 import { ScoreDisplay } from './components/score-display'
-import ThreeScene from './components/threeScene'
+import ThreeScene from './components/threeScene' // Import the ThreeScene component
 import { useUserContext } from '@/context/UserContext'
 
 export default function Game() {
@@ -27,20 +27,29 @@ export default function Game() {
       })
 
       setPlayerInfo({
-        player1: { 
-          name: player1Data.name || 'Player 1', 
-          image: player1Data.image || '/placeholder.svg?height=56&width=56' 
+        player1: {
+          name: player1Data.name || 'Player 1',
+          image: player1Data.image || '/placeholder.svg?height=56&width=56'
         },
-        player2: { 
-          name: player2Data.name || 'Player 2', 
-          image: player2Data.image || '/placeholder.svg?height=56&width=56' 
+        player2: {
+          name: player2Data.name || 'Player 2',
+          image: player2Data.image || '/placeholder.svg?height=56&width=56'
         }
       })
     }
   }, [localOneVsOneNames])
 
+  const handleScoreUpdate = (newScore) => {
+    setGameState(prevState => ({
+      ...prevState,
+      player1Score: newScore.player1,
+      player2Score: newScore.player2,
+      winner:newScore.winner
+    }))
+  }
+
   return (
-    <div className="min-h-screen bg-background p-4">
+    <div className=" bg-background p-4">
       <div className="space-y-4">
         <div className="grid grid-cols-3 gap-10">
           <PlayerCard
@@ -51,14 +60,14 @@ export default function Game() {
             rank="Pro"
             isActive={!gameState.winner || gameState.winner === playerInfo.player1.name}
           />
-          
+
           <ScoreDisplay
             player1Score={gameState.player1Score}
             player2Score={gameState.player2Score}
             winner={gameState.winner}
             isGameOver={gameState.isGameOver}
           />
-          
+
           <PlayerCard
             source={playerInfo.player2.image}
             playerName={playerInfo.player2.name}
@@ -69,11 +78,10 @@ export default function Game() {
           />
         </div>
 
-        <div className="rounded-lg border bg-muted overflow-hidden">
-          <ThreeScene />
+        <div className="h-screen rounded-lg h-full border bg-muted overflow-hidden">
+          <ThreeScene onScoreUpdate={handleScoreUpdate} />
         </div>
       </div>
     </div>
   )
 }
-

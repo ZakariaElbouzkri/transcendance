@@ -6,6 +6,10 @@ import classes from './page.module.css';
 import axios from 'axios';
 import { useUserContext } from '@/context/UserContext';
 import { useWebSocket } from '@/context/WebSocketContext';
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
 const Logout: React.FC = () => {
   const router = useRouter();

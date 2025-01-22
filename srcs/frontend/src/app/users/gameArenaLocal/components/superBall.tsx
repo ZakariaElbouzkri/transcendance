@@ -21,7 +21,7 @@ export default function SuperBall({ paddlePositions, onScoreUpdate }: SuperBallP
   const maxX = 5 - radius
   const maxZ = (planeH / 2) - radius
   const winScore = 3
-  const [countdown, setCountdown] = useState(10)
+  const [countdown, setCountdown] = useState(3)
   const [gameStarted, setGameStarted] = useState(false)
   const lastCollisionTime = useRef(0)
   const COLLISION_COOLDOWN = 0.1
@@ -110,6 +110,7 @@ export default function SuperBall({ paddlePositions, onScoreUpdate }: SuperBallP
           newScore = { ...score, player2: score.player2 + 1 }
         }
         setScore(newScore)
+        onScoreUpdate(newScore) // Call the callback to update the scores in the Game component
 
         if (newScore.player1 >= winScore) {
           setWinner('Player 1')
@@ -144,7 +145,7 @@ export default function SuperBall({ paddlePositions, onScoreUpdate }: SuperBallP
           clearcoatRoughness={0.1}
         />
       </Sphere>
-      
+
       {countdown > 0 && (
         <Html center>
           <div className="text-5xl font-bold text-white drop-shadow-lg">
@@ -152,18 +153,6 @@ export default function SuperBall({ paddlePositions, onScoreUpdate }: SuperBallP
           </div>
         </Html>
       )}
-
-      {winner && (
-        <Html center>
-          <div className="relative w-[500px] h-[500px] bg-black/90 p-10 rounded-lg text-white text-5xl font-bold text-center flex flex-col items-center justify-center gap-4">
-            <div>{winner} wins!</div>
-            <div className="text-3xl">
-              Score: {score.player1} : {score.player2}
-            </div>
-          </div>
-        </Html>
-      )}
     </>
   )
 }
-

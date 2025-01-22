@@ -10,8 +10,8 @@ import Paddle from './paddle'
 const planeH = 15
 const planeW = 10
 
-export default function ThreeScene() {
-  const [score, setScore] = useState({ player1: 0, player2: 0 })
+export default function ThreeScene(playerOne, playerTwo) {
+  const [score, setScore] = useState({ playerOne: 0, playerTwo: 0 })
   const [paddle1Pos, setPaddle1Pos] = useState([0, 0, (planeH / 2) - 0.1])
   const [paddle2Pos, setPaddle2Pos] = useState([0, 0, -(planeH / 2) + 0.1])
 

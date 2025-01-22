@@ -153,7 +153,7 @@ export default function SuperBall({ paddlePositions, onScoreUpdate }: SuperBallP
         </Html>
       )}
 
-      {winner && (
+      {/* {winner && (
         <Html center>
           <div className="relative w-[500px] h-[500px] bg-black/90 p-10 rounded-lg text-white text-5xl font-bold text-center flex flex-col items-center justify-center gap-4">
             <div>{winner} wins!</div>
@@ -162,7 +162,7 @@ export default function SuperBall({ paddlePositions, onScoreUpdate }: SuperBallP
             </div>
           </div>
         </Html>
-      )}
+      )} */}
     </>
   )
 }

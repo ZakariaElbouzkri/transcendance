@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation'
 import { UserContext, useUserContext } from '@/context/UserContext'
 import axios from 'axios'
 import PlayerInfosFr from '@/components/FriendPage/PlayerInfos/PlayerInfosFr'
-import WeeklyAttendanceFr from '@/components/FriendPage/WeeklyAttendance/WeeklyAttendanceFr'
+// import WeeklyAttendanceFr from '@/components/FriendPage/WeeklyAttendance/WeeklyAttendanceFr'
 import RateFr from '@/components/FriendPage/Rate/RateFr'
 import ProgressBarFr from '@/components/FriendPage/ProgressBar/ProgressBarFr'
 import FriendsFr from '@/components/FriendPage/Friends/FriendsFr'
@@ -54,7 +54,7 @@ const FriendPage = ({ params }) => {
     <div className={classes.home}>
       <div className={classes.container}>
         <div className={classes.box1}><PlayerInfosFr/></div>
-        <div className={classes.box2}><WeeklyAttendanceFr/></div>
+        {/* <div className={classes.box2}><WeeklyAttendanceFr/></div> */}
         <div className={classes.box3}><RateFr/></div>
         <div className={classes.line}><ProgressBarFr/></div>
         <div className={classes.box4}><FriendActions/></div>

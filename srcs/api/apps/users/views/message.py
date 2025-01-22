@@ -23,7 +23,7 @@ class MessageViewSet(viewsets.ModelViewSet):
                 Q(initiator=user) | Q(recipient=user)
             ).first()
             if connection:
-                return Message.objects.filter(connection=connection).order_by('timestamp')
+                return Message.objects.filter(connection=connection).order_by('-timestamp')
 
         return Message.objects.none()
 
