@@ -1,19 +1,16 @@
-"use client";
+"use client"
 
-import React from "react";
-import Image from "next/image";
-import styles from "./playerInfos.module.css";
-import TimeDifference from "../TimeDifference/TimeDifference";
-import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
-import { useUserContext } from "@/context/UserContext";
+import type React from "react"
+import Image from "next/image"
+import styles from "./playerInfos.module.css"
+import CopyToClipboard from "../CopyToClipboard/CopyToClipboard"
+import { useUserContext } from "@/context/UserContext"
 
-// Helper function to truncate text
 const truncateText = (text: string | undefined, maxLength: number) => {
-  if (!text) return "Loading...";
-  return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
-};
+  if (!text) return "Loading..."
+  return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text
+}
 
-// Component to display a single info item
 const InfoItem: React.FC<{ title: string; value: string | undefined }> = ({ title, value }) => (
   <div className={styles.info}>
     <h2 className={styles.title}>{title}:</h2>
@@ -22,22 +19,16 @@ const InfoItem: React.FC<{ title: string; value: string | undefined }> = ({ titl
       <CopyToClipboard textToCopy={value || ""} width={18} height={18} />
     </div>
   </div>
-);
+)
 
-// Main PlayerInfos component
 const PlayerInfos: React.FC<{ user: string }> = ({ user }) => {
-  const { userData, userDataSearch } = useUserContext();
-  const data = user === "search" ? userDataSearch : userData;
+  const { userData, userDataSearch } = useUserContext()
+  const data = user === "search" ? userDataSearch : userData
 
-  const defaultAvatarUrl = "https://res.cloudinary.com/doufu6atn/image/upload/v1726742774/nxdrt0md7buyeghyjyvj.png";
-
-  // Type guard to check if the data is of type UserDataType
-  const isUserDataType = (data: typeof userData | typeof userDataSearch): data is typeof userData =>
-    "last_login" in data;
+  const defaultAvatarUrl = "https://res.cloudinary.com/doufu6atn/image/upload/v1726742774/nxdrt0md7buyeghyjyvj.png"
 
   return (
     <div className={styles.playerinfos}>
-      {/* User Image and Name Section */}
       <div className={styles.imageContainer}>
         <div className={styles.imageWrapper}>
           <Image
@@ -51,25 +42,14 @@ const PlayerInfos: React.FC<{ user: string }> = ({ user }) => {
             <div className={`${styles.statusDot} ${data.is_online ? styles.online : styles.offline}`} />
           )}
         </div>
-        <div className={styles.nameUnderImage}>
-          {truncateText(`${data.first_name} ${data.last_name}`, 20)}
-        </div>
-        {/* Only show last login if data is of UserDataType */}
-        {!data.is_online && isUserDataType(data) && data.last_login && (
-          <div className={styles.lastSeen}>
-            Last seen: <TimeDifference timestamp={data.last_login} />
-          </div>
-        )}
+        <div className={styles.nameUnderImage}>{truncateText(`${data.first_name} ${data.last_name}`, 20)}</div>
       </div>
-
-      {/* User Info Section */}
       <div className={styles.infosContainer}>
         <InfoItem title="Username" value={data.username} />
         <InfoItem title="ID" value={data.id?.toString()} />
-        {user !== "search" && "email" in data && <InfoItem title="Email" value={data.email} />}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PlayerInfos;
+export default PlayerInfos

@@ -44,7 +44,7 @@ const Home = () => {
           <WeeklyAttendance user="current" />
         </div>
         <div className={`${classes.box} ${classes.box3}`}>
-          <Rate />
+          <Rate user="current"/>
         </div>
         <div className={classes.line}>
           <ProgressBar />

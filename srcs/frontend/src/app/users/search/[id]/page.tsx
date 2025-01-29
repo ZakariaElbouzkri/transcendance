@@ -74,7 +74,7 @@ const SearchProfile = () => {
             <WeeklyAttendance user="search" />
           </div>
           <div className={classes.box3}>
-            <Rate />
+            <Rate user="search" />
           </div>
           <div className={classes.line}>
             <ProgressBarFr ratingFr={searchedUserData.rating} />
