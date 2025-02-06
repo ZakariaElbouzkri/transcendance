@@ -17,10 +17,8 @@ export default function ThreeScene({ onScoreUpdate }) {
   const { myPaddel, oppPaddel, ball, move, gameEnded, winner, me: wsMe } = useGameSocket();
   const ballRef = useRef();
 
-  // Memoize player position calculation
   const me = useMemo(() => (myPaddel.y === 0 ? -1 : 1), [myPaddel.y]);
 
-  // Score update handler
   const handleScoreUpdate = useCallback(() => {
     onScoreUpdate?.({
       player1: myPaddel.score,
@@ -29,7 +27,6 @@ export default function ThreeScene({ onScoreUpdate }) {
     });
   }, [onScoreUpdate, myPaddel.score, oppPaddel.score]);
 
-  // Keyboard controls
   useEffect(() => {
     const handleKeyDown = (event) => {
       switch (event.key) {
@@ -44,9 +41,8 @@ export default function ThreeScene({ onScoreUpdate }) {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [move, me]); // Added missing 'me' dependency
+  }, [move, me]); 
 
-  // Ball position updates
   useEffect(() => {
     if (ballRef.current) {
       ballRef.current.position.set(
@@ -55,18 +51,16 @@ export default function ThreeScene({ onScoreUpdate }) {
         -7.5 + ((ball.y * planeH) / 800)
       );
     }
-  }, [ball.x, ball.y, me]); // Added missing 'me' dependency
+  }, [ball.x, ball.y, me]);
 
-  // Score updates
   useEffect(() => {
     handleScoreUpdate();
   }, [handleScoreUpdate]);
 
-  // Fixed JSX structure
   return (
-    <div className="h-full aspect-[1/0.5]">
-      {gameEnded && <WinnerCared player={wsMe} winner={winner} />}
-      <Canvas camera={{ position: [0, 20, 0], fov: 60 }}>
+      (gameEnded ? <WinnerCared player={wsMe} winner={winner} />:
+      <div className="w-[calc(90vw-250px)] h-[calc(90vh-80px)] mr-10 ml-10">
+      <Canvas camera={{ position: [-4, 20, 0], fov: 60 }}>
         <OrbitControls />
         <ambientLight intensity={0.4} />
         <Plane />
@@ -95,6 +89,6 @@ export default function ThreeScene({ onScoreUpdate }) {
           color="blue"
         />
       </Canvas>
-    </div>
+    </div>)
   );
 }

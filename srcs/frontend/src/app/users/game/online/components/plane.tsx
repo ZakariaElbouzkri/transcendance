@@ -11,8 +11,8 @@ export default function Plane() {
     new THREE.MeshStandardMaterial({ color: 0x000000, side: THREE.BackSide }), // right
     new THREE.MeshStandardMaterial({ color: 0x000000, side: THREE.BackSide }), // left
     new THREE.MeshStandardMaterial({ transparent: true, opacity: 0, side: THREE.DoubleSide }), // top
-    new THREE.MeshStandardMaterial({ color: 0x000000,opacity: 0, side: THREE.DoubleSide }), // bottom
-    new THREE.MeshStandardMaterial({ color: 0x000000, side: THREE.BackSide }), // front
+    new THREE.MeshStandardMaterial({ color: 0x25c64c,opacity: 0, side: THREE.DoubleSide }), // bottom
+    new THREE.MeshStandardMaterial({ color: 0x25c64c, side: THREE.BackSide }), // front
     new THREE.MeshStandardMaterial({ color: 0x000000, side: THREE.BackSide })  // back
   ]
 

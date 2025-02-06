@@ -72,8 +72,9 @@ export default function ThreeScene({ onScoreUpdate, player1, player2, setPage}) 
   }, [])
 
   return (
-    <div className="h-full aspect-[1/0.5]">
-      <Canvas camera={{ position: [0, 10, 2], fov: 60 }}>
+
+    <div className="w-[calc(90vw-250px)] h-[calc(90vh-80px)] mr-10 ml-10">
+      <Canvas camera={{ position: [0, 20, 2], fov: 80 }}>
         <OrbitControls />
         <ambientLight intensity={0.4} />
         <Plane />
