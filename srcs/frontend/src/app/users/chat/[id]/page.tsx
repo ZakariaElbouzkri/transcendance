@@ -187,9 +187,9 @@ export default function BoxedChatInterface() {
   };
 
   return (
-    <div className="main-content">
-    <div className="w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden flex">
-      <div className="h-full w-1/3 border-r border-gray-200 dark:border-gray-700">
+<div className="flex items-center mt-3 justify-center main-content">
+  <div className="w-[calc(100%-20px)] h-[calc(100%-20px)] bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden flex">
+      <div className=" w-1/3 border-r border-gray-200 dark:border-gray-700">
         <div className="p-4">
           <Input
             type="search"

@@ -45,12 +45,10 @@ export default function PingPongMatchup() {
   }), [me.id, me.username, me.avatar])
 
   
-  // Handle opponent data when room is available
   useEffect(() => {
     if (room && !stageReady) {
       const opp = getOpponent()
       console.log('OPP:', opp)
-      // Only update if we have valid opponent data
       setPlayer2({
         id: opp.id,
         name: opp.username,
@@ -59,7 +57,6 @@ export default function PingPongMatchup() {
     }
   }, [room, getOpponent])
 
-  // Random opponent animation effect
   useEffect(() => {
     if (!stageReady && isMatching && !room) {
       intervalRef.current = setInterval(() => {
@@ -72,7 +69,6 @@ export default function PingPongMatchup() {
     }
   }, [isMatching, stageReady, room])
 
-  // Countdown effect
   useEffect(() => {
     if (!stageReady) return
 
@@ -156,11 +152,9 @@ export default function PingPongMatchup() {
 }
 
 function PlayerCard({ player, color }: { player: Player, color: "blue" | "red" }) {
-  // Use a combination of ID and avatar URL as the key to force re-render
   const [avatarKey, setAvatarKey] = useState(`${player.id}-${Date.now()}`);
   const [avatarSrc, setAvatarSrc] = useState(player.avatar);
 
-  // Update both the source and key when player changes
   useEffect(() => {
     setAvatarSrc(player.avatar);
     setAvatarKey(`${player.id}-${Date.now()}`);
@@ -173,7 +167,7 @@ function PlayerCard({ player, color }: { player: Player, color: "blue" | "red" }
         color === 'blue' ? 'border-blue-500' : 'border-red-500'
       } overflow-hidden relative`}>
         <Image
-          key={avatarKey} // Force re-render with new key
+          key={avatarKey}
           src={avatarSrc}
           alt={`${player.name}'s avatar`}
           fill

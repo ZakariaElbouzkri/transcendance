@@ -25,7 +25,8 @@ const Home = () => {
     const checkToken = async () => {
       try {
         // Use the test_auth endpoint to verify authentication
-        await Api.get("/auth/test_auth/",{withCredentials: true})
+        await Api.get("/auth/test_auth/",{withCredentials: true});
+        console.log("Token is valid");
       } catch (err) {
         console.log("Token validation error:", err);
         router.push("/auth/signin");

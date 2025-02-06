@@ -1,0 +1,251 @@
+# version: '3.8'
+
+services:
+    #################################################################
+    #                          DATA BASE                            #
+    #################################################################
+    pgdb:
+        image: postgres:trns
+        container_name: postgres
+        build:
+            context: ./srcs/postgres/
+        volumes:
+            - postgres_data:/var/lib/postgresql/data/
+            - ./srcs/postgres/logs/:/var/log/postgresql/
+        networks:
+            - transcendance_net
+            - elk
+        restart: always
+        env_file:
+            - ./srcs/postgres/.env
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
+            interval: 30s
+            timeout: 10s
+            retries: 5
+    #################################################################
+    
+    #################################################################
+    #                            WEB APP                            #
+    #################################################################
+    backend:
+        image: django:trns
+        container_name: backend
+        build:
+            context: ./srcs/api/
+        volumes:
+            - ./srcs/api:/var/www
+            - vault_creds:/var/www/cred.d/
+            - static_files:/var/www/static/
+        networks:
+            - transcendance_net
+            - elk
+        ports:
+            - 8000:8000
+        env_file:
+            - ./srcs/api/.env
+        environment:
+            # - PROD=false
+            - PROD=true
+        depends_on:
+            vault:
+                condition: service_healthy
+            redis:
+                condition: service_healthy
+
+        restart: on-failure
+
+    frontend:
+        image: frontend:trns
+        build: ./srcs/frontend
+        container_name: nextJs
+        ports:
+            - "3000:3000"  # Map host port 3000 to container port 3000
+        volumes:
+            - ./srcs/frontend/src/:/app/src/
+        depends_on:
+            - backend
+        networks:
+            - transcendance_net
+        env_file:
+            - ./srcs/frontend/.env
+        restart: on-failure
+
+    #################################################################
+
+    #################################################################
+    #                             REDIS                             #
+    #################################################################
+    redis:
+        image: redis:trns
+        container_name: redis
+        build:
+            context: ./srcs/redis/
+        ports:
+            - "6379:6379"
+        networks:
+            - transcendance_net
+        volumes:
+            - ./srcs/redis/logs/:/var/log/redis/
+        restart: always
+        healthcheck:
+            test: ["CMD", "redis-cli", "ping"]
+            interval: 30s
+            timeout: 5s
+            retries: 3
+            start_period: 10s
+    #################################################################
+
+    #################################################################
+    #                         ELK stack                             #
+    #################################################################
+    # elasticsearch:
+    #     container_name: elasticsearch
+    #     image: elastic:trns
+    #     build:
+    #         context: ./srcs/ELK/elasticsearch/
+    #     env_file:
+    #         - ./srcs/ELK/.env
+    #     environment:
+    #         - discovery.type=single-node
+    #         - xpack.security.enabled=true
+    #         - ES_JAVA_OPTS=-Xms1g -Xmx1g
+    #     cap_add:
+    #         - IPC_LOCK
+    #     ulimits:
+    #         memlock:
+    #             soft: -1
+    #             hard: -1
+    #     mem_limit: 2g
+    #     healthcheck:
+    #         test: ["CMD-SHELL", "curl -s -u $${ELASTIC_USERNAME}:$${ELASTIC_PASSWORD} http://localhost:9200/_cat/health >/dev/null || exit 1"]
+    #         interval: 30s
+    #         timeout: 30s
+    #         retries: 3
+    #         start_period: 60s
+    #     volumes:
+    #         - es_data:/usr/share/elasticsearch/data
+    #     ports:
+    #         - "9200:9200"
+    #         - "9300:9300"
+    #     networks:
+    #         - elk
+    #     restart: always
+
+    # setup_kibana:
+    #     image: curlimages/curl:latest
+    #     container_name: setup_kibana
+    #     volumes:
+    #         - ./srcs/ELK/tools/init-kibana.sh:/init-kibana.sh
+    #     command: ["sh", "/init-kibana.sh"]
+    #     networks:
+    #         - elk
+    #     env_file:
+    #         - ./srcs/ELK/.env
+    #     depends_on:
+    #         elasticsearch:
+    #             condition: service_healthy
+    
+    # logstash:
+    #     container_name: logstash
+    #     image: logstash:trns
+    #     build:
+    #         context: ./srcs/ELK/logstash/
+    #     volumes:
+    #         - ./srcs/postgres/logs/:/var/log/postgres/
+    #         - ./srcs/vault/logs:/var/log/vault
+    #         - ./srcs/redis/logs:/var/log/redis
+    #         - ./srcs/nginx/logs:/var/log/nginx
+    #     ports:
+    #         - "50000:50000"
+    #         - "9600:9600"
+    #     env_file:
+    #         - ./srcs/ELK/.env
+    #     environment:
+    #         - LS_JAVA_OPTS=-Xms256m -Xmx256m
+    #     networks:
+    #         - elk
+    #     depends_on:
+    #         elasticsearch:
+    #             condition: service_healthy
+
+    # kibana:
+    #     container_name: kibana
+    #     image: kibana:trns
+    #     build:
+    #         context: ./srcs/ELK/kibana/
+    #     depends_on:
+    #         setup_kibana:
+    #             condition: service_completed_successfully
+    #     env_file:
+    #         - ./srcs/ELK/.env
+    #     ports:
+    #         - "5601:5601"
+    #     networks:
+    #         - elk 
+    #################################################################
+
+    #################################################################
+    #                           VAULT & WAF                         #
+    #################################################################
+    vault:
+        image: vault:trns
+        container_name: vault
+        build:
+            context: ./srcs/vault/
+        ports:
+            - "8200:8200"
+        cap_add:
+            - IPC_LOCK
+        networks:
+            - elk
+            - transcendance_net
+        volumes:
+            - vault_creds:/vault/init/
+            - ./srcs/vault/logs:/vault/logs
+        environment:
+            - VAULT_ADDR=http://127.0.0.1:8200
+        env_file:
+            - ./srcs/api/.env
+            - ./srcs/postgres/.env
+        restart: unless-stopped
+        healthcheck:
+            test: ["CMD-SHELL", "ls /vault/init | grep django"]
+            interval: 30s
+            timeout: 10s
+            retries: 5
+        depends_on:
+            pgdb:
+                condition: service_healthy
+    
+    nginx:
+        image: ngnix:trns
+        container_name: nginx
+        build:
+            context: ./srcs/nginx/
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ./srcs/nginx/logs/:/var/log/nginx/
+            - ./srcs/nginx/modlogs/:/var/log/modsecurity/
+            - static_files:/usr/share/nginx/html/staticfiles/
+        networks:
+            - transcendance_net
+        depends_on:
+            - backend
+            - frontend
+        restart: always
+    #################################################################
+
+
+volumes:
+    postgres_data:
+    vault_creds:
+        name: vault_creds
+    es_data:
+    static_files:
+
+networks:
+    transcendance_net:
+    elk:

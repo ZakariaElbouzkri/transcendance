@@ -64,7 +64,6 @@ export const GameSocketProvider = ({ children }: { children: React.ReactNode }) 
   const getOpponent = useCallback(() => {
     return opp.current;
   }, [ opp ]);
-  // Update meRef when userData changes
   useEffect(() => {
     meRef.current = {
       id: userData.id,
@@ -152,7 +151,6 @@ export const GameSocketProvider = ({ children }: { children: React.ReactNode }) 
 
     ws.current.onmessage = handleMessage;
 
-    // Modified onclose handler - remove reconnection logic
     ws.current.onclose = () => {
       setIsConnected(false);
     };
