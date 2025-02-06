@@ -42,9 +42,9 @@ const EntreInfos: React.FC<EntreInfosProps> = ({ setPage }) => {
         ))}
       </div>
       <div className={styles.startButtonContainer}>
-        <button className={styles.startButton} onClick={() => setPage("map")}>
+       {(localTournementNames[0] !== "" && localTournementNames[1] !== "" && localTournementNames[2] !== "" && localTournementNames[3] !== "") && <button className={styles.startButton} onClick={() => setPage("map")}>
           Start the game
-        </button>
+        </button>}
       </div>
     </div>
   );

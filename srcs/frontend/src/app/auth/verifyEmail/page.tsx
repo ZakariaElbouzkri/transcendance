@@ -1,11 +1,11 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, Suspense } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
-import axios from "axios"
 import styles from "./verifyEmail.module.css"
+import Api from "@/lib/api"
 
-const VerifyEmail = () => {
+function VerifyEmailContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const [message, setMessage] = useState("")
@@ -24,36 +24,35 @@ const VerifyEmail = () => {
 
     if (uid && token) {
       const verifyEmail = async () => {
-        setIsLoading(true);
+        setIsLoading(true)
         try {
-          const response = await axios.get("http://localhost:8000/api/auth/email/verify/", {
+          const response = await Api.get("/auth/email/verify/", {
             params: { uid, token },
-          });
+          })
 
           if (response.status === 200) {
-            setMessage(response.data.message || "Email verified successfully!");
-            setIsVerified(true);
-            setShowResend(false);
+            setMessage(response.data.message || "Email verified successfully!")
+            setIsVerified(true)
+            setShowResend(false)
           }
         } catch (error) {
-          let errorMsg = "Email verification failed.";
-          
+          let errorMsg = "Email verification failed."
+
           if (error.response) {
-            const data = error.response.data;
-            errorMsg = data.detail || data.token?.[0] || data.uid?.[0] || "Email verification failed.";
-            
+            const data = error.response.data
+            errorMsg = data.detail || data.token?.[0] || data.uid?.[0] || "Email verification failed."
+
             if (errorMsg === "Link is invalid or expired") {
-              setShowResend(true);
+              setShowResend(true)
             }
           } else {
-            errorMsg = "An error occurred during verification.";
+            errorMsg = "An error occurred during verification."
           }
-
-          setError(errorMsg);
+          setError(errorMsg)
         } finally {
-          setIsLoading(false);
+          setIsLoading(false)
         }
-      };
+      }
 
       verifyEmail()
     }
@@ -68,20 +67,15 @@ const VerifyEmail = () => {
       return
     }
     try {
-      const response = await axios.post("http://localhost:8000/api/auth/email/resend_verify_email/", {
-        email,
-      })
-      console.log(response)
+      const response = await Api.post("/auth/email/resend_verify_email/", { email })
 
       if (response.status === 201) {
-        console.log("Verification email has been resent.")
         setResendMessage(response.data.message || "A new verification email has been sent.")
         setResendSuccess(true)
         setError("")
         setShowResend(false)
       }
     } catch (error) {
-      console.log("Failed to resend email.")
       setResendSuccess(false)
       if (error.response?.data?.email) {
         setResendError(error.response.data.email[0])
@@ -97,13 +91,13 @@ const VerifyEmail = () => {
         <h1 className={styles.title}>
           {resendSuccess ? "Verification Email Sent Successfully!" : "Email Verification"}
         </h1>
-        
+
         {isLoading && <p className={styles.loadingMessage}>Verifying your email...</p>}
         {message && <p className={`${styles.message} ${styles.successMessage}`}>{message}</p>}
         {error && !resendSuccess && <p className={`${styles.message} ${styles.errorMessage}`}>{error}</p>}
 
         {isVerified && (
-          <button onClick={() => router.push("/auth/login")} className={styles.button}>
+          <button onClick={() => router.push("/auth/signin")} className={styles.button}>
             Go to Login Page
           </button>
         )}
@@ -137,4 +131,11 @@ const VerifyEmail = () => {
   )
 }
 
-export default VerifyEmail
+export default function VerifyEmailPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <VerifyEmailContent />
+    </Suspense>
+  )
+}
+

@@ -16,16 +16,17 @@ import Api from "@/lib/api"
 
 // If you want single-string errors for each field:
 type ServerErrorData = {
-  firstname?: string
-  lastname?: string
+  first_name?: string
+  last_name?: string
   email?: string
   username?: string
   password?: string
+  non_field_errors?: string
 }
 
 type FormData = {
-  firstname: string
-  lastname: string
+  first_name: string
+  last_name: string
   email: string
   username: string
   password: string
@@ -35,8 +36,8 @@ export default function SignUpPage() {
   const router = useRouter()
 
   const [formData, setFormData] = useState<FormData>({
-    firstname: "",
-    lastname: "",
+    first_name: "",
+    last_name: "",
     email: "",
     username: "",
     password: "",
@@ -56,7 +57,7 @@ export default function SignUpPage() {
     setErrors({})
     setIsLoading(true)
 
-    if (formData.firstname.trim() === "" || formData.lastname.trim() === "") {
+    if (formData.first_name.trim() === "" || formData.last_name.trim() === "") {
       setErrors({ non_field_errors: "First name and last name cannot be blank" })
       setIsLoading(false)
       return
@@ -68,8 +69,8 @@ export default function SignUpPage() {
         username: formData.username,
         password: formData.password,
         email: formData.email,
-        first_name: formData.firstname,
-        last_name: formData.lastname,
+        first_name: formData.first_name,
+        last_name: formData.last_name,
       })
       setIsSuccess(true)
     } catch (error: unknown) {
@@ -117,22 +118,22 @@ export default function SignUpPage() {
                   <p className={styles.description}>Please create your account.</p>
                   <form onSubmit={handleSubmit} className={styles.form}>
                     <InputField
-                      label="Firstname"
-                      name="firstname"
-                      id="firstname"
+                      label="First_name"
+                      name="first_name"
+                      id="first_name"
                       type="text"
-                      value={formData.firstname}
+                      value={formData.first_name}
                       onChange={handleChange}
-                      error={errors.firstname}
+                      error={errors.first_name}
                     />
                     <InputField
-                      label="Lastname"
-                      name="lastname"
-                      id="lastname"
+                      label="Last_name"
+                      name="last_name"
+                      id="last_name"
                       type="text"
-                      value={formData.lastname}
+                      value={formData.last_name}
                       onChange={handleChange}
-                      error={errors.lastname}
+                      error={errors.last_name}
                     />
                     <InputField
                       label="Email"

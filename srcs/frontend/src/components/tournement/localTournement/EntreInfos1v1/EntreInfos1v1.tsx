@@ -46,9 +46,9 @@ const EntreInfos1v1: React.FC<EntreInfosProps> = ({ setPage, setPlayers, players
           </div>
       </div>
       <div className={styles.startButtonContainer}>
-        <button className={styles.startButton} onClick={() => setPage("startedGame")}>
+        {(players.player1 !== "" && players.player2 !== "") && <button className={styles.startButton} onClick={() => setPage("startedGame")}>
           Start the game
-        </button>
+        </button>}
       </div>
     </div>
   );

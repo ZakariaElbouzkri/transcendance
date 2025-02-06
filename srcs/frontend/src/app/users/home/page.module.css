@@ -50,13 +50,13 @@
 .box1, .box2, .box3 {
     height: 236px;
     clip-path: polygon(28px 0, 100% 0, 100% calc(100% - 28px), calc(100% - 28px) 100%, 0 100%, 0 28px);
-    background-color: #3040D3;
+    background-color: #ffffff;
 }
 
 .box4, .box5, .box6 {
     height: 512px;
     clip-path: polygon(28px 0, 100% 0, 100% calc(100% - 28px), calc(100% - 28px) 100%, 0 100%, 0 28px);
-    background-color: #3040D3;
+    background-color: #ffffff;
 }
 
 .line {

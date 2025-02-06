@@ -2,10 +2,30 @@
   display: flex;
   width: 100vw;
   height: 100vh;
-  background-image: url('https://imgcdn.stablediffusionweb.com/2025/1/31/e80fa9dd-94f5-488b-8bdd-fa7ddbd0ea1c.jpg'); /* Add your image path here */
+  position: relative; /* Needed for pseudo-element positioning */
+  overflow: hidden; /* Ensure blur doesn't leak outside */
+}
+
+.layout-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://imgcdn.stablediffusionweb.com/2025/1/31/e80fa9dd-94f5-488b-8bdd-fa7ddbd0ea1c.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  filter: blur(5px); /* Adjust blur intensity */
+  background-color: rgba(53, 53, 53, 0.75); /* White overlay with 50% opacity */
+  background-blend-mode: overlay; /* Blend the white color with the image */
+}
+
+/* Ensure content stays on top of the background */
+.layout-container > * {
+  position: relative;
+  z-index: 1;
 }
 
 .verticalNavbarr {

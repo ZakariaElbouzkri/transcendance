@@ -15,6 +15,7 @@ interface Player {
   is_online: boolean;
   wins: number;
   loses: number;
+  rating: number;
 }
 
 interface LeaderboardResponse {
@@ -98,7 +99,7 @@ const Leaderboard: React.FC = () => {
                   <span className={classes.username}>{player.username}</span>
                 </div>
                 <span className={classes.wl}>{player.wins}/{player.loses}</span>
-                <span className={classes.rating}>500</span>
+                <span className={classes.rating}>{player.rating}</span>
               </div>
             ))}
           </div>
